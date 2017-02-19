@@ -1,12 +1,12 @@
 
 #ifndef GIROSCOPIO_H
 #define GIROSCOPIO_H
+#include "My_MPU6050_6Axis_MotionApps20.h"
 
 #include <Arduino.h>
 #include "I2Cdev.h"
 #include "Wire.h"
-#include "My_MPU6050_6Axis_MotionApps20.h"
-#include "helper_3dmath.h"
+//#include "helper_3dmath.h"
 
 class giroscopio{
   MPU6050 mpu;
@@ -26,11 +26,11 @@ class giroscopio{
   VectorFloat gravity;    // [x, y, z]            gravity vector
   float euler[3];         // [psi, theta, phi]    Euler angle container
   float ypr[3];           // [yaw, pitch, roll]   yaw/pitch/roll container and gravity vector
-
   
 public:
   giroscopio();
   void init();
+  void ler();
 
 };
 
