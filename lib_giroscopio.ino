@@ -6,7 +6,7 @@
 #include "giroscopio.h"
 
 
-//giroscopio giro;
+giroscopio giro;
 /*
 MPU6050 mpu;
 
@@ -36,18 +36,22 @@ uint8_t teapotPacket[14] = { '$', 0x02, 0,0, 0,0, 0,0, 0,0, 0x00, 0x00, '\r', '\
 // ===               INTERRUPT DETECTION ROUTINE                ===
 // ================================================================
 
+*/
+bool blinkState = false;
 volatile bool mpuInterrupt = false;     // indicates whether MPU interrupt pin has gone high
 void dmpDataReady() {
     mpuInterrupt = true;
 }
 
-*/
 
 // ================================================================
 // ===                      INITIAL SETUP                       ===
 // ================================================================
 
 void setup() {
+    giro.init();
+   attachInterrupt(0, dmpDataReady, RISING);
+    pinMode(13, OUTPUT);   
     // join I2C bus (I2Cdev library doesn't do this automatically)
 /*
     Wire.begin();
@@ -172,4 +176,13 @@ void loop() {
 
   }
   */
-}
+  
+  if(mpuInterrupt){
+    giro.ler();
+    blinkState = !blinkState;
+    mpuInterrupt = false;
+    digitalWrite(13, blinkState);
+  }
+ // digitalWrite(13, blinkState);
+ // delay(30);
+}  
