@@ -7,8 +7,11 @@
 #include "I2Cdev.h"
 #include "Wire.h"
 //#include "helper_3dmath.h"
+//#include "My_Interrupts.h"
 
 class giroscopio{
+private:
+  
   MPU6050 mpu;
 
   bool dmpReady = false;  // set true if DMP init was successful
@@ -28,7 +31,9 @@ class giroscopio{
   float ypr[3];           // [yaw, pitch, roll]   yaw/pitch/roll container and gravity vector
   
  // volatile bool mpuInterrupt = false;     // indicates whether MPU interrupt pin has gone high
-  
+  static giroscopio * instance;
+  static void isr();
+  void interrupcao();
 public:
   giroscopio();
   void init();

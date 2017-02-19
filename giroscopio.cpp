@@ -1,11 +1,13 @@
 #include "giroscopio.h"
 
-giroscopio::giroscopio(){
+giroscopio * giroscopio::instance;
 
+giroscopio::giroscopio(){
+  instance = this;
 }
 
 void giroscopio::init(){
-
+    
     Wire.begin();
     //TWBR = 24; // 400kHz I2C clock (200kHz if CPU is 8MHz)
 
@@ -62,6 +64,16 @@ void giroscopio::init(){
         Serial.print(devStatus);
         Serial.println(F(")"));
     }
+    
+    attachInterrupt(0, isr, RISING);
+}
+
+void giroscopio::isr(){
+  instance->interrupcao();
+}
+
+void giroscopio::interrupcao(){
+  
 }
 
 void  giroscopio::ler(){
