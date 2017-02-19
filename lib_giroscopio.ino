@@ -1,10 +1,13 @@
 // I2Cdev and MPU6050 must be installed as libraries, or else the .cpp/.h files
 // for both classes must be in the include path of your project
 #include "I2Cdev.h"
-#include "MPU6050_6Axis_MotionApps20.h"
+//#include "MPU6050.h"
 #include "Wire.h"
+#include "giroscopio.h"
 
 
+giroscopio giro;
+/*
 MPU6050 mpu;
 
 // MPU control/status vars
@@ -38,7 +41,7 @@ void dmpDataReady() {
     mpuInterrupt = true;
 }
 
-
+*/
 
 // ================================================================
 // ===                      INITIAL SETUP                       ===
@@ -46,7 +49,7 @@ void dmpDataReady() {
 
 void setup() {
     // join I2C bus (I2Cdev library doesn't do this automatically)
-
+/*
     Wire.begin();
     //TWBR = 24; // 400kHz I2C clock (200kHz if CPU is 8MHz)
 
@@ -103,7 +106,7 @@ void setup() {
         Serial.print(devStatus);
         Serial.println(F(")"));
     }
-
+*/
 }
 
 
@@ -113,6 +116,7 @@ void setup() {
 // ================================================================
 
 void loop() {
+  /*
   // if programming failed, don't try to do anything
   if (!dmpReady) return;
 
@@ -167,4 +171,5 @@ void loop() {
       Serial.println(ypr[2] * 180/M_PI);
 
   }
+  */
 }
