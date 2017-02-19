@@ -27,6 +27,8 @@ class giroscopio{
   float euler[3];         // [psi, theta, phi]    Euler angle container
   float ypr[3];           // [yaw, pitch, roll]   yaw/pitch/roll container and gravity vector
   
+ // volatile bool mpuInterrupt = false;     // indicates whether MPU interrupt pin has gone high
+  
 public:
   giroscopio();
   void init();
