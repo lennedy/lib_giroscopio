@@ -1,13 +1,21 @@
 
 #ifndef GIROSCOPIO_H
 #define GIROSCOPIO_H
-#include "My_MPU6050_6Axis_MotionApps20.h"
+
+#define ERR_MPU6050_CONNECTION_FAILED -1
+#define ERR_NO 0
 
 #include <Arduino.h>
-#include "I2Cdev.h"
 #include "Wire.h"
-//#include "helper_3dmath.h"
-//#include "My_Interrupts.h"
+#include "I2Cdev.h"
+#include "My_MPU6050_6Axis_MotionApps20.h"
+
+
+struct YPR{
+  float yaw;
+  float pitch;
+  float roll;
+};
 
 class giroscopio{
 private:
@@ -30,15 +38,17 @@ private:
   float euler[3];         // [psi, theta, phi]    Euler angle container
   float ypr[3];           // [yaw, pitch, roll]   yaw/pitch/roll container and gravity vector
   
- // volatile bool mpuInterrupt = false;     // indicates whether MPU interrupt pin has gone high
+  volatile bool mpuInterrupt = false;     // indicates whether MPU interrupt pin has gone high
   static giroscopio * instance;
   static void isr();
   void interrupcao();
 public:
   giroscopio();
-  void init();
-  void ler();
-
+  int init();
+  void ler(YPR &leitura);
+	void ler(float &rotacao_x, float &rotacao_y, float &rotacao_z);
+  inline boolean mpuInterruptActive(){return mpuInterrupt;}
+  inline void clear_mpuInterrupt(){mpuInterrupt=false;}
 };
 
 #endif
