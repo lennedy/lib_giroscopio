@@ -44,11 +44,11 @@ private:
   void interrupcao();
 public:
   giroscopio();
-  int init();
-  void ler(YPR &leitura);
-	void ler(float &rotacao_x, float &rotacao_y, float &rotacao_z);
-  inline boolean mpuInterruptActive(){return mpuInterrupt;}
-  inline void clear_mpuInterrupt(){mpuInterrupt=false;}
+  int init();									//funcao para configurar os parametros iniciais do giroscopio
+  void ler(YPR &leitura);			//realizar leitura retornando uma struct YPR declarada acima neste .h
+	void ler(float &rotacao_x, float &rotacao_y, float &rotacao_z);		//realizar a leitura retornando tres variaveis float
+  inline boolean mpuInterruptActive(){return mpuInterrupt;}					//identifica se houve uma interrupção, portanto, identica que existem dados
+  inline void clear_mpuInterrupt(){mpuInterrupt=false;}							//mostra que a interrupcao ja foi tratada
 };
 
 #endif
