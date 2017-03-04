@@ -36,7 +36,7 @@ int giroscopio::init(){
     mpu.setZAccelOffset(1788); // 1688 factory default for my test chip
 
     // make sure it worked (returns 0 if so)
-    if (devStatus == 0) {
+    if (devStatus == ERR_NO) {
         // turn on the DMP, now that it's ready
         //Serial.println(F("Enabling DMP..."));
         mpu.setDMPEnabled(true);

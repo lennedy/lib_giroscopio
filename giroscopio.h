@@ -2,8 +2,11 @@
 #ifndef GIROSCOPIO_H
 #define GIROSCOPIO_H
 
-#define ERR_MPU6050_CONNECTION_FAILED -1
-#define ERR_NO 0
+enum ERROS{
+	ERR_NO=0,												//Codigo para quando nao houver erros
+	ERR_MPU6050_CONNECTION_FAILED		//Codigo para quando houver erro de conexão com o hardware
+
+};
 
 #include <Arduino.h>
 #include "Wire.h"
